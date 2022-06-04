@@ -6,7 +6,7 @@ setup information of PRI cards on FreeSWITCH 1.10 with ubuntu 20.04
 #### Step1: wanpipe library setup
 ```bash
 apt-get -y install gcc g++ automake autoconf libtool make libncurses5-dev flex bison patch libtool autoconf linux-headers-$(uname -r) libxml2-dev cmake
-``
+```
 
 ```
 cd /usr/src/
