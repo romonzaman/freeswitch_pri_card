@@ -4,15 +4,19 @@ setup information of PRI cards on FreeSWITCH 1.10 with ubuntu 20.04
 ```
 
 #### Step1: wanpipe library setup
-
+```bash
 apt-get -y install gcc g++ automake autoconf libtool make libncurses5-dev flex bison patch libtool autoconf linux-headers-$(uname -r) libxml2-dev cmake
+``
 
+```
 cd /usr/src/
 wget https://ftp.sangoma.com/linux/current_wanpipe/wanpipe-current.tgz
 tar xvfz wanpipe-current.tgz
 cd wanpipe-<version>/
 make
 make install
+```
+
 
 ###### detect board found
 
@@ -36,12 +40,13 @@ Device name | Protocol | Station | Status |
 wanpipe1 | AFT TE1 | N/A | Connected |
 
 #### Step2: sangoma isdn library setup
-
+```bash
 cd /usr/src
 wget https://ftp.sangoma.com/linux/libsng_isdn/libsng_isdn-current.x86_64.tgz
 tar xvfz libsng_isdn-current.x86_64.tgz
 cd libsng_isdn-<version>.<arch>
 make install
+```
 
 #### Step3: Compaile FreeTDM module
 ```bash
