@@ -59,6 +59,26 @@ make
 make install
 ```
 
+###### troubleshooting on compile
+nano +1657 src/mod/outoftree/mod_freetdm/mod_freetdm.c
+```c
+        if (!zstr(dest)) {
+-               ftdm_set_string(caller_data.dnis.digits, dest);
++               strcpy(caller_data.dnis.digits, dest);
+        }
+```
+
+nano +1335 src/mod/outoftree/mod_freetdm/src/ftdm_io.c
+```c
+                for (i = 0; i < count; i++) {
+                        if (strcmp(tokens[i], token)) {
+-                               ftdm_copy_string(ftdmchan->tokens[ftdmchan->token_count], tokens[i], sizeof(ftdmchan->tokens[ftdmchan->token_count]));
++                               memcpy(ftdmchan->tokens[ftdmchan->token_count], tokens[i], sizeof(ftdmchan->tokens[ftdmchan->token_count]));
+                                ftdmchan->token_count++;
+                        }
+                }
+```
+
 #### Step4: create configuration file
 
 > wancfg_fs
@@ -115,6 +135,53 @@ checking if freetdm module get any missing deps.
 if require, move files to corret path.
 ```bash
 ldd /usr/lib/freeswitch/mod/mod_freetdm.so
+mv /usr/local/freetdm/mod/* /usr/lib/freeswitch/mod/
 ```
 
 #### freeswitch commands
+
+
+
+#### dialplan
+
+-- outbound
+```xml
+<extension name="freetdm-wp1-55" continue="false" uuid="b9e01e26-53b5-46fd-893e-08ffd7f0600d">
+	<condition field="${freetdm_span_name}" expression="wp1"/>
+	<condition field="destination_number" expression="^55$">
+		<action application="export" data="call_direction=inbound" inline="true"/>
+		<action application="set" data="domain_uuid=ac2322ec-52aa-4b90-82c9-6f571a02b09f" inline="true"/>
+		<action application="set" data="domain_name=192.168.1.118" inline="true"/>
+		<action application="set" data="channel_number=${freetdm_chan_number}"/>
+		<action application="info" data=""/>
+		<action application="pre_answer" data=""/>
+		<action application="set" data="instant_ringback=true"/>
+		<action application="set" data="ringback=%(2000,4000,440.0,480.0)"/>
+		<action application="sleep" data="1000"/>
+		<action application="answer" data=""/>
+		<action application="transfer" data="55  XML 192.168.1.118"/>
+	</condition>
+</extension>
+```
+
+
+-- inbound
+```xml
+<extension name="freetdm.d11" continue="false" uuid="7a32cba3-e312-4adb-91aa-11b21282d1cf">
+	<condition field="${user_exists}" expression="false"/>
+	<condition field="destination_number" expression="^(\d{11})$">
+		<action application="set" data="sip_h_X-accountcode=${accountcode}"/>
+		<action application="export" data="call_direction=outbound"/>
+		<action application="unset" data="call_timeout"/>
+		<action application="set" data="hangup_after_bridge=true"/>
+		<action application="set" data="effective_caller_id_name=${outbound_caller_id_name}"/>
+		<action application="set" data="effective_caller_id_number=${outbound_caller_id_number}"/>
+		<action application="set" data="inherit_codec=true"/>
+		<action application="set" data="ignore_display_updates=true"/>
+		<action application="set" data="callee_id_number=$1"/>
+		<action application="set" data="continue_on_fail=1,2,3,6,18,21,27,28,31,34,38,41,42,44,58,88,111,403,501,602,607"/>
+		<action application="bridge" data="freetdm/1/a/$1"/>
+	</condition>
+</extension>
+```
+
