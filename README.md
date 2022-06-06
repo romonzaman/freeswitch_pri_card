@@ -147,6 +147,9 @@ nano /etc/freeswitch/autoload_configs/freetdm.conf.xml
 
 #### troubleshooting
 
+mod_freetdm.so file location is /usr/lib/freeswitch/mod/mod_freetdm.so
+if it is other place , move to this location
+
 checking if freetdm module get any missing deps.
 if require, move files to corret path.
 ```bash
