@@ -84,7 +84,7 @@ nano +1660 src/mod/outoftree/mod_freetdm/mod_freetdm/mod_freetdm.c
         }
 ```
 
-nano +1335 src/mod/outoftree/mod_freetdm/src/ftdm_io.c
+nano +1338 src/mod/outoftree/mod_freetdm/src/ftdm_io.c
 ```c
                 for (i = 0; i < count; i++) {
                         if (strcmp(tokens[i], token)) {
