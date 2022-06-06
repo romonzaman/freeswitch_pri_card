@@ -9,6 +9,10 @@ apt-get -y install gcc g++ automake autoconf libtool make libncurses5-dev flex b
 ```
 
 ```
+-- after extract, there will directory based on current version
+-- we need to enter that directory and build
+```
+```
 cd /usr/src/
 wget https://ftp.sangoma.com/linux/current_wanpipe/wanpipe-current.tgz
 tar xvfz wanpipe-current.tgz
@@ -40,6 +44,11 @@ Device name | Protocol | Station | Status |
 wanpipe1 | AFT TE1 | N/A | Connected |
 
 #### Step2: sangoma isdn library setup
+```
+-- after extract, there will directory based on current version
+-- we need to enter that directory and build
+```
+
 ```bash
 cd /usr/src
 wget https://ftp.sangoma.com/linux/libsng_isdn/libsng_isdn-current.x86_64.tgz
