@@ -76,11 +76,13 @@ make install
 ```
 
 ###### troubleshooting on compile
+###### modify two file so that compile works
+
 nano +1660 src/mod/outoftree/mod_freetdm/mod_freetdm/mod_freetdm.c
 ```c
         if (!zstr(dest)) {
--               ftdm_set_string(caller_data.dnis.digits, dest);
-+               strcpy(caller_data.dnis.digits, dest);
+               //ftdm_set_string(caller_data.dnis.digits, dest);
+               strcpy(caller_data.dnis.digits, dest);
         }
 ```
 
@@ -88,8 +90,8 @@ nano +1338 src/mod/outoftree/mod_freetdm/src/ftdm_io.c
 ```c
                 for (i = 0; i < count; i++) {
                         if (strcmp(tokens[i], token)) {
--                               ftdm_copy_string(ftdmchan->tokens[ftdmchan->token_count], tokens[i], sizeof(ftdmchan->tokens[ftdmchan->token_count]));
-+                               memcpy(ftdmchan->tokens[ftdmchan->token_count], tokens[i], sizeof(ftdmchan->tokens[ftdmchan->token_count]));
+                               //ftdm_copy_string(ftdmchan->tokens[ftdmchan->token_count], tokens[i], sizeof(ftdmchan->tokens[ftdmchan->token_count]));
+                               memcpy(ftdmchan->tokens[ftdmchan->token_count], tokens[i], sizeof(ftdmchan->tokens[ftdmchan->token_count]));
                                 ftdmchan->token_count++;
                         }
                 }
