@@ -76,7 +76,7 @@ make install
 ```
 
 ###### troubleshooting on compile
-nano +1657 src/mod/outoftree/mod_freetdm/mod_freetdm/mod_freetdm.c
+nano +1660 src/mod/outoftree/mod_freetdm/mod_freetdm/mod_freetdm.c
 ```c
         if (!zstr(dest)) {
 -               ftdm_set_string(caller_data.dnis.digits, dest);
