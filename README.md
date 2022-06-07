@@ -112,14 +112,14 @@ make install
 > wancfg_fs
 
 - this will create configuration files.
-- Physical layer
+  - **Physical layer**
 /etc/wanpipe/wanpipe1.conf
 /etc/wanpipe/wanrouter.rc
 
-- FreeTDM Signaling layer
+  - **FreeTDM Signaling layer**
 /etc/freeswitch/freetdm.conf (b and d channels)
 
-- FreeSWITCH related files
+  - **FreeSWITCH related files**
 /etc/freeswitch/autoload_configs/freetdm.conf.xml (channel details for your Sangoma card)
 
  > wanrouter start
