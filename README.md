@@ -105,6 +105,8 @@ sed -i 's/ftdm_copy_string(ftdmchan->tokens\[ftdmchan->token_count/memcpy(ftdmch
 make
 make install
 
+mv /usr/local/freetdm/mod/* /usr/lib/freeswitch/mod/
+
 ```
 
 #### Step4: create configuration file
@@ -173,13 +175,12 @@ if it is other place , move to this location
 checking if freetdm module get any missing deps.
 if require, move files to corret path.
 ```bash
-mv /usr/local/freetdm/mod/* /usr/lib/freeswitch/mod/ /usr/lib/freeswitch/mod/mod_freetdm.so
-mv /usr/local/freetdm/mod/* /usr/lib/freeswitch/mod/
+	mv /usr/local/freetdm/mod/* /usr/lib/freeswitch/mod/
 ```
 
 #### freeswitch commands
-
-
+> load mod_freetdm
+> reload mod_freetdm
 
 #### dialplan
 
