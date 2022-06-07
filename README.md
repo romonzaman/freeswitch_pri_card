@@ -70,14 +70,8 @@ mv ssi.x /usr/include/sng_isdn/
 ```bash
 cd /usr/src/freeswitch/
 ```
-modify modules.conf and ensure mod_freetdm is enabled
 
-```bash
-sed -i 's/#mod_freetdm/mod_freetdm/g' modules.conf
-```
-
-###### modify two file so that compile works
-
+###### we will modify two file so that compile works
 line-1660: src/mod/outoftree/mod_freetdm/mod_freetdm/mod_freetdm.c
 ```c
         if (!zstr(dest)) {
@@ -85,8 +79,7 @@ line-1660: src/mod/outoftree/mod_freetdm/mod_freetdm/mod_freetdm.c
                strcpy(caller_data.dnis.digits, dest);
         }
 ```
-```
-```
+
 line-1338: src/mod/outoftree/mod_freetdm/src/ftdm_io.c
 ```c
                 for (i = 0; i < count; i++) {
