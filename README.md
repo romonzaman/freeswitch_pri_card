@@ -184,6 +184,7 @@ if require, move files to corret path.
 
 #### freeswitch commands
 > load mod_freetdm
+
 > reload mod_freetdm
 
 #### dialplan
