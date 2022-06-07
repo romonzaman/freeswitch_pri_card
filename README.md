@@ -106,6 +106,7 @@ make
 make install
 
 mv /usr/local/freetdm/mod/* /usr/lib/freeswitch/mod/
+mv /usr/local/freeswitch/mod/mod_freetdm.so /usr/lib/freeswitch/mod/
 
 ```
 
