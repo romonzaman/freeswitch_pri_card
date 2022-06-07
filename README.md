@@ -166,6 +166,7 @@ load freetd module
 > fs_cli
 ```
 load mod_freetdm
+
 ```
 
 #### troubleshooting
@@ -186,6 +187,8 @@ if require, move files to corret path.
 > load mod_freetdm
 
 > reload mod_freetdm
+
+> module_exists mod_freetdm
 
 #### dialplan
 
@@ -230,3 +233,6 @@ if require, move files to corret path.
 </extension>
 ```
 
+### fusionpnx modules
+
+- ensure freetdm module is setup as true for default. so that it autoload after restart
