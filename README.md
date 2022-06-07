@@ -188,7 +188,7 @@ if require, move files to corret path.
 
 #### dialplan
 
--- outbound
+-- Inbound
 ```xml
 <extension name="freetdm-wp1-55" continue="false" uuid="b9e01e26-53b5-46fd-893e-08ffd7f0600d">
 	<condition field="${freetdm_span_name}" expression="wp1"/>
@@ -209,7 +209,7 @@ if require, move files to corret path.
 ```
 
 
--- inbound
+-- outbound
 ```xml
 <extension name="freetdm.d11" continue="false" uuid="7a32cba3-e312-4adb-91aa-11b21282d1cf">
 	<condition field="${user_exists}" expression="false"/>
