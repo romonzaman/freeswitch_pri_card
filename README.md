@@ -169,8 +169,7 @@ load mod_freetdm
 
 #### troubleshooting
 
-
-mod_freetdm.so file location is /usr/lib/freeswitch/mod/mod_freetdm.so
+1) mod_freetdm.so file location is /usr/lib/freeswitch/mod/mod_freetdm.so
 if it is other place , move to this location
 
 checking if freetdm module get any missing deps.
@@ -178,6 +177,9 @@ if require, move files to corret path.
 ```bash
 	mv /usr/local/freetdm/mod/* /usr/lib/freeswitch/mod/
 ```
+
+2) mod_freetdm failed to open span card.
+   > reboot -f
 
 #### freeswitch commands
 > load mod_freetdm
