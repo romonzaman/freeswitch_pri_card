@@ -26,15 +26,16 @@ make install
 ###### detect board found
 
 > wanrouter hwprobe
+```
 -------------------------------
 | Wanpipe Hardware Probe Info |
 | ------------------------------- |
 1 . AFT-A101-SH : SLOT=4 : BUS=8 : IRQ=177 : CPU=A : PORT=1 : HWEC=32 : V=37
 Card Cnt: A101-2=1
-
+```
 
 > wanrouter status
-
+```
 Devices currently active:
 wanpipe1
 Wanpipe Config:
@@ -43,6 +44,7 @@ wanpipe1 | N/A | A101/1D/A102/2D/4/4D/8| 177 | 4 | 1 | N/A | 0 |
 Wanrouter Status:
 Device name | Protocol | Station | Status |
 wanpipe1 | AFT TE1 | N/A | Connected |
+```
 
 #### Step2: sangoma isdn library setup
 ```
@@ -82,7 +84,10 @@ nano +1660 src/mod/outoftree/mod_freetdm/mod_freetdm/mod_freetdm.c
                strcpy(caller_data.dnis.digits, dest);
         }
 ```
-
+```
+cp src/mod/outoftree/mod_freetdm/mod_freetdm/mod_freetdm.c src/mod/outoftree/mod_freetdm/mod_freetdm/mod_freetdm.c.bk
+sed -i 's/ftdm_set_string(caller_data.dnis.digits, dest);/strcpy(caller_data.dnis.digits, dest);/g' src/mod/outoftree/mod_freetdm/mod_freetdm/mod_freetdm.c
+```
 nano +1338 src/mod/outoftree/mod_freetdm/src/ftdm_io.c
 ```c
                 for (i = 0; i < count; i++) {
@@ -92,6 +97,11 @@ nano +1338 src/mod/outoftree/mod_freetdm/src/ftdm_io.c
                                 ftdmchan->token_count++;
                         }
                 }
+```
+
+```bash
+cp src/mod/outoftree/mod_freetdm/src/ftdm_io.c src/mod/outoftree/mod_freetdm/src/ftdm_io.c.bk
+sed -i 's/ftdm_copy_string(ftdmchan->tokens\[ftdmchan->token_count/memcpy(ftdmchan->tokens\[ftdmchan->token_count/g' src/mod/outoftree/mod_freetdm/src/ftdm_io.c
 ```
 
 ```bash
