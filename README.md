@@ -5,7 +5,7 @@ setup information of PRI cards on FreeSWITCH 1.10 with ubuntu 20.04
 
 #### Step1: wanpipe library setup
 ```bash
-apt-get -y install gcc g++ automake autoconf libtool make libncurses5-dev flex bison patch libtool autoconf linux-headers-$(uname -r) libxml2-dev cmake
+apt-get -y install gcc g++ automake autoconf libtool make libncurses5-dev flex bison patch libtool autoconf linux-headers-$(uname -r) libxml2-dev cmake mlocate
 ```
 
 ```
@@ -16,7 +16,8 @@ apt-get -y install gcc g++ automake autoconf libtool make libncurses5-dev flex b
 cd /usr/src/
 wget https://ftp.sangoma.com/linux/current_wanpipe/wanpipe-current.tgz
 tar xvfz wanpipe-current.tgz
-cd wanpipe-<version>/
+mv wanpipe-*/ wanpipe
+cd wanpipe/
 make
 make install
 ```
@@ -53,8 +54,12 @@ wanpipe1 | AFT TE1 | N/A | Connected |
 cd /usr/src
 wget https://ftp.sangoma.com/linux/libsng_isdn/libsng_isdn-current.x86_64.tgz
 tar xvfz libsng_isdn-current.x86_64.tgz
-cd libsng_isdn-<version>.<arch>
+mv libsng_isdn-*/ libsng_isdn/
+cd libsng_isdn
 make install
+
+wget https://raw.githubusercontent.com/romonzaman/freeswitch_pri_card/main/ssi.x
+mv ssi.x /usr/include/sng_isdn/
 ```
 
 #### Step3: Compaile FreeTDM module
@@ -64,15 +69,7 @@ cd /usr/src/freeswitch/
 modify modules.conf and ensure mod_freetdm is enabled
 
 ```bash
-nano modules.conf
-mod_freetdm|https://github.com/freeswitch/freetdm.git -b master
-```
-
-```bash
-./bootstrap
-./configure
-make
-make install
+sed -i 's/#mod_freetdm/mod_freetdm/g' modules.conf
 ```
 
 ###### troubleshooting on compile
@@ -97,19 +94,27 @@ nano +1338 src/mod/outoftree/mod_freetdm/src/ftdm_io.c
                 }
 ```
 
+```bash
+./bootstrap
+./configure
+make
+make install
+```
+
 #### Step4: create configuration file
 
 > wancfg_fs
 
+- this will create configuration files.
 - Physical layer
-/etc/wanpipe/wanpipeX.conf (x represents each port of your card. For analog cards, you will only see 1 for the entire card)
-/etc/wanpipe/wanrouter.rc (The Sangoma driver looks into this file to begin loading each port for your card(s)
+/etc/wanpipe/wanpipe1.conf
+/etc/wanpipe/wanrouter.rc
 
 - FreeTDM Signaling layer
-/usr/local/freeswitch/conf/freetdm.conf (b and d channels)
+/etc/freeswitch/freetdm.conf (b and d channels)
 
 - FreeSWITCH related files
-/usr/local/freeswitch/conf/autoload_configs/freetdm.conf.xml (channel details for your Sangoma card)
+/etc/freeswitch/autoload_configs/freetdm.conf.xml (channel details for your Sangoma card)
 
  > wanrouter start
 
@@ -121,7 +126,7 @@ echo 'SUBSYSTEM=="wanpipe", OWNER="www-data", GROUP="www-data", MODE="0660"' > /
 
 #### Configuration
 
-nano /etc/freeswitch/autoload_configs/freetdm.conf.xml
+cat /etc/freeswitch/autoload_configs/freetdm.conf.xml
 ```xml
 <configuration name="freetdm.conf" description="Freetdm Configuration">
 <settings>
@@ -147,7 +152,14 @@ nano /etc/freeswitch/autoload_configs/freetdm.conf.xml
 </configuration>
 ```
 
+load freetd module
+> fs_cli
+```
+load mod_freetdm
+```
+
 #### troubleshooting
+
 
 mod_freetdm.so file location is /usr/lib/freeswitch/mod/mod_freetdm.so
 if it is other place , move to this location
@@ -155,7 +167,7 @@ if it is other place , move to this location
 checking if freetdm module get any missing deps.
 if require, move files to corret path.
 ```bash
-ldd /usr/lib/freeswitch/mod/mod_freetdm.so
+mv /usr/local/freetdm/mod/* /usr/lib/freeswitch/mod/ /usr/lib/freeswitch/mod/mod_freetdm.so
 mv /usr/local/freetdm/mod/* /usr/lib/freeswitch/mod/
 ```
 
