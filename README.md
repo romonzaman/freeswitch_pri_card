@@ -20,6 +20,7 @@ mv wanpipe-*/ wanpipe
 cd wanpipe/
 make
 make install
+
 ```
 
 
@@ -62,6 +63,7 @@ make install
 
 wget https://raw.githubusercontent.com/romonzaman/freeswitch_pri_card/main/ssi.x
 mv ssi.x /usr/include/sng_isdn/
+
 ```
 
 #### Step3: Compaile FreeTDM module
@@ -74,10 +76,9 @@ modify modules.conf and ensure mod_freetdm is enabled
 sed -i 's/#mod_freetdm/mod_freetdm/g' modules.conf
 ```
 
-###### troubleshooting on compile
 ###### modify two file so that compile works
 
-nano +1660 src/mod/outoftree/mod_freetdm/mod_freetdm/mod_freetdm.c
+line-1660: src/mod/outoftree/mod_freetdm/mod_freetdm/mod_freetdm.c
 ```c
         if (!zstr(dest)) {
                //ftdm_set_string(caller_data.dnis.digits, dest);
@@ -85,10 +86,8 @@ nano +1660 src/mod/outoftree/mod_freetdm/mod_freetdm/mod_freetdm.c
         }
 ```
 ```
-cp src/mod/outoftree/mod_freetdm/mod_freetdm/mod_freetdm.c src/mod/outoftree/mod_freetdm/mod_freetdm/mod_freetdm.c.bk
-sed -i 's/ftdm_set_string(caller_data.dnis.digits, dest);/strcpy(caller_data.dnis.digits, dest);/g' src/mod/outoftree/mod_freetdm/mod_freetdm/mod_freetdm.c
 ```
-nano +1338 src/mod/outoftree/mod_freetdm/src/ftdm_io.c
+line-1338: src/mod/outoftree/mod_freetdm/src/ftdm_io.c
 ```c
                 for (i = 0; i < count; i++) {
                         if (strcmp(tokens[i], token)) {
@@ -100,15 +99,19 @@ nano +1338 src/mod/outoftree/mod_freetdm/src/ftdm_io.c
 ```
 
 ```bash
+sed -i 's/#mod_freetdm/mod_freetdm/g' modules.conf
+
+cp src/mod/outoftree/mod_freetdm/mod_freetdm/mod_freetdm.c src/mod/outoftree/mod_freetdm/mod_freetdm/mod_freetdm.c.bk
+sed -i 's/ftdm_set_string(caller_data.dnis.digits, dest);/strcpy(caller_data.dnis.digits, dest);/g' src/mod/outoftree/mod_freetdm/mod_freetdm/mod_freetdm.c
+
 cp src/mod/outoftree/mod_freetdm/src/ftdm_io.c src/mod/outoftree/mod_freetdm/src/ftdm_io.c.bk
 sed -i 's/ftdm_copy_string(ftdmchan->tokens\[ftdmchan->token_count/memcpy(ftdmchan->tokens\[ftdmchan->token_count/g' src/mod/outoftree/mod_freetdm/src/ftdm_io.c
-```
 
-```bash
-./bootstrap
+./bootstrap || ./rebootstrap.sh
 ./configure
 make
 make install
+
 ```
 
 #### Step4: create configuration file
