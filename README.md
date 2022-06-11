@@ -94,14 +94,15 @@ line-1338: src/mod/outoftree/mod_freetdm/src/ftdm_io.c
 ```bash
 sed -i 's/#mod_freetdm/mod_freetdm/g' modules.conf
 
+./bootstrap || ./rebootstrap.sh
+./configure
+
 cp src/mod/outoftree/mod_freetdm/mod_freetdm/mod_freetdm.c src/mod/outoftree/mod_freetdm/mod_freetdm/mod_freetdm.c.bk
 sed -i 's/ftdm_set_string(caller_data.dnis.digits, dest);/strcpy(caller_data.dnis.digits, dest);/g' src/mod/outoftree/mod_freetdm/mod_freetdm/mod_freetdm.c
 
 cp src/mod/outoftree/mod_freetdm/src/ftdm_io.c src/mod/outoftree/mod_freetdm/src/ftdm_io.c.bk
 sed -i 's/ftdm_copy_string(ftdmchan->tokens\[ftdmchan->token_count/memcpy(ftdmchan->tokens\[ftdmchan->token_count/g' src/mod/outoftree/mod_freetdm/src/ftdm_io.c
 
-./bootstrap || ./rebootstrap.sh
-./configure
 make
 make install
 
