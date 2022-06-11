@@ -243,6 +243,7 @@ if require, move files to corret path.
 #### openvox D130
 
 ```
+cd /usr/src/
 wget https://www.openvox.cn/pub/drivers/dahdi-linux-complete/openvox_dahdi-linux-complete-current.tar.gz
 tar -xvzf openvox_dahdi-linux-complete-current.tar.gz
 mv openvox_dahdi-linux-complete-*/ openvox_dahdi-linux-complete/
