@@ -246,7 +246,7 @@ if require, move files to corret path.
 cd /usr/src/
 wget https://www.openvox.cn/pub/drivers/dahdi-linux-complete/openvox_dahdi-linux-complete-current.tar.gz
 tar -xvzf openvox_dahdi-linux-complete-current.tar.gz
-mv dahdi-linux-complete-*/ openvox_dahdi-linux-complete/
+mv dahdi-linux-complete-*/ dahdi-linux-complete/
 cd dahdi-linux-complete
 make
 make install 
