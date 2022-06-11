@@ -296,7 +296,7 @@ Setting echocan for channel 31 to none
 
 
 ### OpenVOX board with FreeSWITCH
-
+```bash
 cd /usr/src
 wget https://downloads.asterisk.org/pub/telephony/libpri/libpri-current.tar.gz
 tar -xvzf libpri-current.tar.gz
@@ -304,12 +304,15 @@ mv libpri-*/ libpri/
 cd libpri/
 make
 make install
+```
 
+
+```bash
 cd /usr/src/freeswitch/
 ./configure --with-libpri
 make
 make install
-
+```
 
 cat /etc/freeswitch/autoload_configs/freetdm.conf.xml
 ```xml
