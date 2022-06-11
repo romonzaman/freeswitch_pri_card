@@ -330,7 +330,7 @@ cat /etc/freeswitch/autoload_configs/freetdm.conf.xml
 ....
 
 <libpri_spans>
-<span name="wp2">
+<span name="wp1">
 <param name="node" value="cpe"/>
 <param name="switch" value="euroisdn"/>
 <param name="opts" value="none"/>
@@ -345,3 +345,12 @@ cat /etc/freeswitch/autoload_configs/freetdm.conf.xml
 
 ```
 
+nano /etc/freeswitch/freetdm.conf
+```
+[span zt wp1]
+trunk_type => e1
+group=1
+b-channel => 1:1-15
+b-channel => 1:17-31
+d-channel => 1:16
+```
