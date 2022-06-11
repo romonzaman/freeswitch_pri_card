@@ -345,6 +345,10 @@ cat /etc/freeswitch/autoload_configs/freetdm.conf.xml
 
 ```
 
+```
+sed -i 's/asterisk/www-data/g' /etc/udev/rules.d/dahdi.rules
+```
+
 nano /etc/freeswitch/freetdm.conf
 ```
 [span zt wp1]
