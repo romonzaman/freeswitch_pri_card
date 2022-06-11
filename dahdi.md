@@ -148,9 +148,6 @@ make install
 
 ```bash
 
-./bootstrap || ./rebootstrap.sh
-./configure
-
 cp src/mod/outoftree/mod_freetdm/mod_freetdm/mod_freetdm.c src/mod/outoftree/mod_freetdm/mod_freetdm/mod_freetdm.c.bk
 sed -i 's/ftdm_set_string(caller_data.dnis.digits, dest);/strcpy(caller_data.dnis.digits, dest);/g' src/mod/outoftree/mod_freetdm/mod_freetdm/mod_freetdm.c
 
@@ -163,6 +160,8 @@ cd ../../../../
 
 sed -i  's/snprintf(caller_data->aniII, 5/snprintf(caller_data->aniII, sizeof(caller_data->aniII)/g' src/mod/outoftree/mod_freetdm/src/ftmod/ftmod_libpri/ftmod_libpri.c
 
+./bootstrap || ./rebootstrap.sh
+./configure
 
 make
 make install
