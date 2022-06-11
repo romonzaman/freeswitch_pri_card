@@ -68,10 +68,12 @@ modprobe opvxd115
 dahdi_genconf
 ```
 
+```
 By running "dahdi_genconf", it will generate /etc/dahdi/system.conf and etc/asterisk/dahdi-channels.conf automatically.
-
-
 A part of system.conf which is one of the basic channel configuration files is displayed.
+```
+
+
 ```
  # Span 1: D115/D130/0/1 "D115/D130 (E1|T1) Card 0 Span 1" (MASTER)
  span=1,1,0,ccs,hdb3,crc4
