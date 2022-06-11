@@ -312,9 +312,13 @@ make install
 
 ```bash
 cd /usr/src/freeswitch/
+
+cd src/mod/outoftree/mod_freetdm/
 ./configure --with-libpri
 
 sed -i  's/snprintf(caller_data->aniII, 5/snprintf(caller_data->aniII, sizeof(caller_data->aniII)/g' src/mod/outoftree/mod_freetdm/src/ftmod/ftmod_libpri/ftmod_libpri.c
+
+cd ../../../../
 
 make
 make install
