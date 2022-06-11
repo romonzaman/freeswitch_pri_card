@@ -116,7 +116,7 @@ echo "mod_freetdm|https://github.com/romonzaman/freetdm.git -b master" >> module
 
 
 ```bash
-./bootstrap || ./rebootstrap.sh
+#./bootstrap || ./rebootstrap.sh
 ./configure
 make
 make install
