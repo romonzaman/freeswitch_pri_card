@@ -3,12 +3,12 @@
 setup information of PRI cards on FreeSWITCH 1.10 with ubuntu 20.04
 ```
 
-#### Step1: wanpipe library, sangoma isdn and pri library setup, dahdi driver
-```bash
+#### Step1: dependancy, wanpipe library, sangoma isdn and pri library setup, dahdi driver
+```
+echo "#### installing\n"
+echo "####"
 apt-get -y install gcc g++ automake autoconf libtool make libncurses5-dev flex bison patch libtool autoconf linux-headers-$(uname -r) libxml2-dev cmake mlocate
-```
 
-```
 echo "#### building wanpipe\n"
 echo "####"
 cd /usr/src/
@@ -53,19 +53,21 @@ cd libpri/
 make
 make install
 
+echo "\n"
+
+dahdi_hardware
+read -p "Press enter to continue"
 ```
 
 ## Step 2: DAHDI card setup
 #### openvox D130
 
 ```
-dahdi_hardware
-```
-
-```
 modprobe dahdi
 modprobe opvxd115
 dahdi_genconf
+
+read -p "Press enter to continue"
 ```
 
 ```
@@ -104,11 +106,16 @@ Setting echocan for channel 31 to none
 ```
 
 #### Step3: Compaile Freeswitch
+
 ```bash
 cd /usr/src/freeswitch/
-#sed -i 's/#mod_freetdm/mod_freetdm/g' modules.conf
+sed -i '/#mod_freetdm/d' modules.conf
 echo "" >> modules.conf
 echo "mod_freetdm|https://github.com/romonzaman/freetdm.git -b master" >> modules.conf
+```
+
+
+```bash
 ./bootstrap || ./rebootstrap.sh
 ./configure
 make
@@ -167,9 +174,6 @@ cat  <<EOT > /etc/freeswitch/autoload_configs/freetdm.conf.xml
 </configuration>
 EOT
 
-```
-
-```
 cat  <<EOT > /etc/freeswitch/freetdm.conf
 [span zt wp1]
 trunk_type => e1
@@ -178,10 +182,14 @@ b-channel => 1:1-15
 b-channel => 1:17-31
 d-channel => 1:16
 EOT
-
 ```
 
+#### reboot server
+```bash
+reboot -f
 ```
+
+```bash
 cp /usr/src/freeswitch/src/mod/outoftree/mod_freetdm/.libs/ftmod_libpri.so /usr/lib/freeswitch/mod/
 ```
 
