@@ -326,23 +326,35 @@ cp /usr/local/freeswitch/mod/mod_freetdm.so /usr/lib/freeswitch/mod/
 cat /etc/freeswitch/autoload_configs/freetdm.conf.xml
 ```xml
 <configuration name="freetdm.conf" description="Freetdm Configuration">
+<settings>
+<param name="debug" value="0"/>
+<!--<param name="hold-music" value="$${moh_uri}"/>-->
+<!--<param name="enable-analog-option" value="call-swap"/>-->
+<!--<param name="enable-analog-option" value="3-way"/>-->
+</settings>
 
-....
+<config_profiles>
+</config_profiles>
+
+<sangoma_pri_spans>
+</sangoma_pri_spans>
+
+<analog_spans>
+</analog_spans>
 
 <libpri_spans>
-<span name="wp1">
-<param name="node" value="cpe"/>
-<param name="switch" value="euroisdn"/>
-<param name="opts" value="none"/>
-<param name="dp" value="unknown"/>
-<param name="debug" value="all"/>
-<param name="dialplan" value="XML"/>
-<param name="context" value="public"/>
-</span>
+	<span name="wp1">
+		<param name="node" value="cpe"/>
+		<param name="switch" value="euroisdn"/>
+		<param name="opts" value="none"/>
+		<param name="dp" value="unknown"/>
+		<param name="debug" value="all"/>
+		<param name="dialplan" value="XML"/>
+		<param name="context" value="public"/>
+	</span>
 </libpri_spans>
 
-...
-
+</configuration>
 ```
 
 ```
