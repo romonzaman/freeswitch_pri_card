@@ -159,10 +159,10 @@ sed -i 's/ftdm_copy_string(ftdmchan->tokens\[ftdmchan->token_count/memcpy(ftdmch
 
 cd src/mod/outoftree/mod_freetdm/
 ./configure --with-libpri
+cd ../../../../
 
 sed -i  's/snprintf(caller_data->aniII, 5/snprintf(caller_data->aniII, sizeof(caller_data->aniII)/g' src/mod/outoftree/mod_freetdm/src/ftmod/ftmod_libpri/ftmod_libpri.c
 
-cd ../../../../
 
 make
 make install
