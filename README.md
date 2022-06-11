@@ -236,3 +236,100 @@ if require, move files to corret path.
 ### fusionpnx modules
 
 - ensure freetdm module is setup as true for default. so that it autoload after restart
+
+
+## DAHDI card setup
+#### openvox D130
+
+```
+wget https://www.openvox.cn/pub/drivers/dahdi-linux-complete/openvox_dahdi-linux-complete-current.tar.gz
+tar -xvzf openvox_dahdi-linux-complete-current.tar.gz
+mv openvox_dahdi-linux-complete-*/ openvox_dahdi-linux-complete/
+cd openvox_dahdi-linux-complete
+make
+make install 
+make install-config
+
+```
+
+```
+dahdi_hardware
+```
+
+```
+modprobe dahdi
+modprobe opvxd115
+dahdi_genconf
+```
+
+By running "dahdi_genconf", it will generate /etc/dahdi/system.conf and etc/asterisk/dahdi-channels.conf automatically.
+
+
+A part of system.conf which is one of the basic channel configuration files is displayed.
+```
+ # Span 1: D115/D130/0/1 "D115/D130 (E1|T1) Card 0 Span 1" (MASTER)
+ span=1,1,0,ccs,hdb3,crc4
+ # termtype: te
+ bchan=1-15,17-31
+ dchan=16
+ #echocanceller=mg2,1-15,17-31
+ # Global data
+ loadzone        = us
+ defaultzone     = us
+```
+
+> dahdi_cfg -v
+```
+[root@localhost ~]# dahdi_cfg -v DAHDI Tools Version - 2.6.1
+DAHDI Version: 2.6.1 Echo Canceller(s): Configuration ======================
+SPAN 1: CCS/HDB3 Build-out:
+31 channels to configure.
+
+Setting echocan for channel 1 to none
+Setting echocan for channel 2 to none
+Setting echocan for channel 3 to none
+....
+....
+Setting echocan for channel 30 to none
+Setting echocan for channel 31 to none
+```
+
+
+### OpenVOX board with FreeSWITCH
+
+cd /usr/src
+wget https://downloads.asterisk.org/pub/telephony/libpri/libpri-current.tar.gz
+tar -xvzf libpri-current.tar.gz
+mv libpri-*/ libpri/
+cd libpri/
+make
+make install
+
+cd /usr/src/freeswitch/
+./configure --with-libpri
+make
+make install
+
+
+cat /etc/freeswitch/autoload_configs/freetdm.conf.xml
+```xml
+<configuration name="freetdm.conf" description="Freetdm Configuration">
+
+....
+
+<libpri_spans>
+<span name="wp2">
+<param name="node" value="cpe"/>
+<param name="switch" value="euroisdn"/>
+<param name="opts" value="none"/>
+<param name="dp" value="unknown"/>
+<param name="debug" value="all"/>
+<param name="dialplan" value="XML"/>
+<param name="context" value="public"/>
+</span>
+</libpri_spans>
+
+...
+
+```
+
