@@ -121,6 +121,7 @@ make install
 ```bash
 
 cp /usr/local/freetdm/mod/* /usr/lib/freeswitch/mod/
+cp /usr/local/freetdm/mod/* /usr/local/freeswitch/mod/
 cp /usr/local/freeswitch/mod/mod_freetdm.so /usr/lib/freeswitch/mod/
 cp /usr/lib64/libsng_isdn.so* /lib/x86_64-linux-gnu/
 
