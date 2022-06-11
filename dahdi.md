@@ -86,7 +86,8 @@ A part of system.conf which is one of the basic channel configuration files is d
 
 > dahdi_cfg -v
 ```
-[root@localhost ~]# dahdi_cfg -v DAHDI Tools Version - 2.6.1
+[root@localhost ~]# dahdi_cfg -v 
+DAHDI Tools Version - 2.6.1
 DAHDI Version: 2.6.1 Echo Canceller(s): Configuration ======================
 SPAN 1: CCS/HDB3 Build-out:
 31 channels to configure.
