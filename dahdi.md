@@ -3,7 +3,7 @@
 setup information of PRI cards on FreeSWITCH 1.10 with ubuntu 20.04
 ```
 
-#### Step1: wanpipe library, sangoma isdn and pri library setup
+#### Step1: wanpipe library, sangoma isdn and pri library setup, dahdi driver
 ```bash
 apt-get -y install gcc g++ automake autoconf libtool make libncurses5-dev flex bison patch libtool autoconf linux-headers-$(uname -r) libxml2-dev cmake mlocate
 ```
@@ -33,6 +33,18 @@ mv ssi.x /usr/include/sng_isdn/
 
 echo "#### building libpri\n"
 echo "####"
+
+cd /usr/src/
+wget https://www.openvox.cn/pub/drivers/dahdi-linux-complete/openvox_dahdi-linux-complete-current.tar.gz
+tar -xvzf openvox_dahdi-linux-complete-current.tar.gz
+mv dahdi-linux-complete-*/ dahdi-linux-complete/
+cd dahdi-linux-complete
+make
+make install 
+make install-config
+
+echo "#### building libpri\n"
+echo "####"
 cd /usr/src
 wget https://downloads.asterisk.org/pub/telephony/libpri/libpri-current.tar.gz
 tar -xvzf libpri-current.tar.gz
@@ -47,14 +59,6 @@ make install
 #### openvox D130
 
 ```
-cd /usr/src/
-wget https://www.openvox.cn/pub/drivers/dahdi-linux-complete/openvox_dahdi-linux-complete-current.tar.gz
-tar -xvzf openvox_dahdi-linux-complete-current.tar.gz
-mv dahdi-linux-complete-*/ dahdi-linux-complete/
-cd dahdi-linux-complete
-make
-make install 
-make install-config
 
 ```
 
