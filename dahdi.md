@@ -59,10 +59,6 @@ make install
 #### openvox D130
 
 ```
-
-```
-
-```
 dahdi_hardware
 ```
 
