@@ -116,12 +116,9 @@ make install
 
 ```
 
-###### compile will fail. we will do patch now to make compile ok
+###### 
 
 ```bash
-
-make
-make install
 
 cp /usr/local/freetdm/mod/* /usr/lib/freeswitch/mod/
 cp /usr/local/freeswitch/mod/mod_freetdm.so /usr/lib/freeswitch/mod/
