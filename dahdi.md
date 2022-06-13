@@ -176,11 +176,12 @@ EOT
 
 cat  <<EOT > /etc/freeswitch/freetdm.conf
 [span zt wp1]
-trunk_type => e1
-group=1
-b-channel => 1:1-15
-b-channel => 1:17-31
-d-channel => 1:16
+name=wp1
+trunk_type => E1
+group=wp1
+b-channel => 1-15
+b-channel => 17-31
+d-channel => 16
 EOT
 ```
 
