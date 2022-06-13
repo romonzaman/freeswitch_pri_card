@@ -192,10 +192,6 @@ EOT
 reboot -f
 ```
 
-```bash
-cp /usr/src/freeswitch/src/mod/outoftree/mod_freetdm/.libs/ftmod_libpri.so /usr/lib/freeswitch/mod/
-```
-
 
 load freetd module
 > fs_cli
