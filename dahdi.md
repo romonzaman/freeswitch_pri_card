@@ -139,6 +139,7 @@ cp /usr/lib64/libsng_isdn.so* /lib/x86_64-linux-gnu/
 #### Step 4: permission fix
 ```bash
 sed -i 's/asterisk/www-data/g' /etc/udev/rules.d/dahdi.rules
+
 ```
 
 #### Configuration
