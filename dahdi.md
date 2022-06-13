@@ -9,6 +9,8 @@ echo "#### installing\n"
 echo "####"
 apt-get -y install gcc g++ automake autoconf libtool make libncurses5-dev flex bison patch libtool autoconf linux-headers-$(uname -r) libxml2-dev cmake mlocate
 
+```
+```
 echo "#### building wanpipe\n"
 echo "####"
 cd /usr/src/
