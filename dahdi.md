@@ -192,6 +192,7 @@ EOT
 #### reboot server
 ```bash
 reboot -f
+
 ```
 
 
@@ -204,6 +205,7 @@ load mod_freetdm
 
 ```
 ftdm list
+
 ```
 
 #### troubleshooting
