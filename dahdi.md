@@ -200,6 +200,10 @@ load mod_freetdm
 
 ```
 
+```
+ftdm list
+```
+
 #### troubleshooting
 
 1) mod_freetdm.so file location is /usr/lib/freeswitch/mod/mod_freetdm.so
