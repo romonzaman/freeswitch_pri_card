@@ -71,24 +71,19 @@ mv ssi.x /usr/include/sng_isdn/
 cd /usr/src/freeswitch/
 ```
 
-###### we will modify two file so that compile works
-line-1660: src/mod/outoftree/mod_freetdm/mod_freetdm/mod_freetdm.c
+###### we need to modify two file so that compile works
+line-71: src/mod/outoftree/mod_freetdm/mod_freetdm/src/include/ftdm_os.h
 ```c
-        if (!zstr(dest)) {
-               //ftdm_set_string(caller_data.dnis.digits, dest);
-               strcpy(caller_data.dnis.digits, dest);
-        }
+/* #define ftdm_set_string(x,y) {memcpy(x, y, (sizeof(x)>sizeof(y)?sizeof(y):sizeof(x))-1); x[(sizeof(x)>sizeof(y)?sizeof(y):sizeof(x))-1] = 0;} */
+#define ftdm_set_string(x,y) strcpy(x, y)
+
 ```
 
-line-1338: src/mod/outoftree/mod_freetdm/src/ftdm_io.c
+line-136: src/mod/outoftree/mod_freetdm/src/include/private/ftdm_core.h
 ```c
-                for (i = 0; i < count; i++) {
-                        if (strcmp(tokens[i], token)) {
-                               //ftdm_copy_string(ftdmchan->tokens[ftdmchan->token_count], tokens[i], sizeof(ftdmchan->tokens[ftdmchan->token_count]));
-                               memcpy(ftdmchan->tokens[ftdmchan->token_count], tokens[i], sizeof(ftdmchan->tokens[ftdmchan->token_count]));
-                                ftdmchan->token_count++;
-                        }
-                }
+/* #define ftdm_set_string(x,y) {memcpy(x, y, (sizeof(x)>sizeof(y)?sizeof(y):sizeof(x))-1); x[(sizeof(x)>sizeof(y)?sizeof(y):sizeof(x))-1] = 0;} */
+#define ftdm_set_string(x,y) strcpy(x, y)
+
 ```
 
 ```bash
