@@ -76,6 +76,7 @@ sed -i 's/#mod_freetdm/mod_freetdm/g' modules.conf
 
 ./bootstrap || ./rebootstrap.sh
 ./configure
+
 ```
 
 ###### we need to modify two file so that compile works
