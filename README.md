@@ -71,27 +71,30 @@ mv ssi.x /usr/include/sng_isdn/
 cd /usr/src/freeswitch/
 ```
 
-###### we need to modify two file so that compile works
-line-71: src/mod/outoftree/mod_freetdm/mod_freetdm/src/include/ftdm_os.h
-```c
-/* #define ftdm_set_string(x,y) {memcpy(x, y, (sizeof(x)>sizeof(y)?sizeof(y):sizeof(x))-1); x[(sizeof(x)>sizeof(y)?sizeof(y):sizeof(x))-1] = 0;} */
-#define ftdm_set_string(x,y) strcpy(x, y)
-
-```
-
-line-136: src/mod/outoftree/mod_freetdm/src/include/private/ftdm_core.h
-```c
-/* #define ftdm_set_string(x,y) {memcpy(x, y, (sizeof(x)>sizeof(y)?sizeof(y):sizeof(x))-1); x[(sizeof(x)>sizeof(y)?sizeof(y):sizeof(x))-1] = 0;} */
-#define ftdm_set_string(x,y) strcpy(x, y)
-
-```
-
 ```bash
 sed -i 's/#mod_freetdm/mod_freetdm/g' modules.conf
 
 ./bootstrap || ./rebootstrap.sh
 ./configure
+```
 
+###### we need to modify two file so that compile works
+nano +71 src/mod/outoftree/mod_freetdm/mod_freetdm/src/include/ftdm_os.h
+```c
+/* #define ftdm_set_string(x,y) {memcpy(x, y, (sizeof(x)>sizeof(y)?sizeof(y):sizeof(x))-1); x[(sizeof(x)>sizeof(y)?sizeof(y):sizeof(x))-1] = 0;} */
+#define ftdm_set_string(x,y) strcpy(x, y)
+
+```
+
+nano +136 src/mod/outoftree/mod_freetdm/src/include/private/ftdm_core.h
+```c
+/* #define ftdm_set_string(x,y) {memcpy(x, y, (sizeof(x)>sizeof(y)?sizeof(y):sizeof(x))-1); x[(sizeof(x)>sizeof(y)?sizeof(y):sizeof(x))-1] = 0;} */
+#define ftdm_set_string(x,y) strcpy(x, y)
+
+```
+
+
+```
 cp src/mod/outoftree/mod_freetdm/mod_freetdm/mod_freetdm.c src/mod/outoftree/mod_freetdm/mod_freetdm/mod_freetdm.c.bk
 sed -i 's/ftdm_set_string(caller_data.dnis.digits, dest);/strcpy(caller_data.dnis.digits, dest);/g' src/mod/outoftree/mod_freetdm/mod_freetdm/mod_freetdm.c
 
