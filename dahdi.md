@@ -112,7 +112,7 @@ Setting echocan for channel 31 to none
 
 ### Digium TE13x Single-Span T1/E1 Card
 
-http://downloads.digium.com/pub/telephony/dahdi-linux-complete/dahdi-linux-complete-current.tar.gz
+``
 cd /usr/src/
 wget http://downloads.digium.com/pub/telephony/dahdi-linux-complete/dahdi-linux-complete-current.tar.gz
 tar -xvzf dahdi-linux-complete-current.tar.gz
@@ -122,6 +122,7 @@ make
 make install 
 make install-config
 
+```
 
 #### Step3: Compaile Freeswitch
 
