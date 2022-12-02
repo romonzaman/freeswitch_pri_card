@@ -60,6 +60,7 @@ echo "\n"
 
 dahdi_hardware
 read -p "Press enter to continue"
+
 ```
 
 ## Step 2: DAHDI card setup
