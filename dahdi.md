@@ -64,6 +64,7 @@ read -p "Press enter to continue"
 ```
 
 ## Step 2: DAHDI card setup
+
 #### openvox D130
 
 ```
@@ -110,6 +111,16 @@ Setting echocan for channel 31 to none
 ```
 
 ### Digium TE13x Single-Span T1/E1 Card
+
+http://downloads.digium.com/pub/telephony/dahdi-linux-complete/dahdi-linux-complete-current.tar.gz
+cd /usr/src/
+wget http://downloads.digium.com/pub/telephony/dahdi-linux-complete/dahdi-linux-complete-current.tar.gz
+tar -xvzf dahdi-linux-complete-current.tar.gz
+mv dahdi-linux-complete-*/ dahdi-linux-complete/
+cd dahdi-linux-complete
+make
+make install 
+make install-config
 
 
 #### Step3: Compaile Freeswitch
