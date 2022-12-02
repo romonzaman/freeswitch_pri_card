@@ -7,6 +7,7 @@ setup information of PRI cards on FreeSWITCH 1.10 with ubuntu 20.04
 ```
 echo "#### installing\n"
 echo "####"
+apt-get update -y
 apt-get -y install gcc g++ automake autoconf libtool make libncurses5-dev flex bison patch libtool autoconf linux-headers-$(uname -r) libxml2-dev cmake mlocate
 
 ```
@@ -106,6 +107,9 @@ Setting echocan for channel 3 to none
 Setting echocan for channel 30 to none
 Setting echocan for channel 31 to none
 ```
+
+### Digium TE13x Single-Span T1/E1 Card
+
 
 #### Step3: Compaile Freeswitch
 
