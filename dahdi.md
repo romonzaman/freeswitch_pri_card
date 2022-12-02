@@ -125,8 +125,12 @@ make install-config
 ```
 
 ```
-cd /usr/src && wget https://docs.phreaknet.org/script/phreaknet.sh && chmod +x phreaknet.sh && ./phreaknet.sh make
+cd /usr/src && wget https://docs.phreaknet.org/script/phreaknet.sh && chmod +x phreaknet.sh
+
+./phreaknet.sh make
+
 phreaknet install --dahdi
+
 ```
 
 #### Step3: Compaile Freeswitch
