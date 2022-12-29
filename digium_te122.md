@@ -280,7 +280,7 @@ autoconf
 ./configure
 make
 make install
-cd dahdi-linux-complete-3.1.0+3.1.0
+cd ../dahdi-linux-complete-3.1.0+3.1.0
 make install-config
 #check dahdi driver is loaded
 lsmod |grep dahdi
