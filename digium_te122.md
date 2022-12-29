@@ -270,7 +270,7 @@ cp dahdi-linux-complete-3.1.0+3.1.0/linux/drivers/dahdi/firmware/dahdi-fw*.tar.g
 cd dahdi-linux
 make
 make install
-cd dahdi-tools
+cd ../dahdi-tools
 ./bootstrap.sh
 libtoolize --force
 aclocal
