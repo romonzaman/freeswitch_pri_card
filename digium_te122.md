@@ -247,3 +247,50 @@ if require, move files to corret path.
 - ensure freetdm module is setup as true for default. so that it autoload after restart
 
 
+####### test
+###
+
+cd /usr/local/src/
+wget https://downloads.asterisk.org/pub/telephony/asterisk/asterisk-17-current.tar.gz
+wget https://downloads.asterisk.org/pub/telephony/dahdi-linux-complete/dahdi-linux-complete-3.1.0+3.1.0.tar.gz
+wget https://downloads.asterisk.org/pub/telephony/libpri/libpri-1.6.0.tar.gz
+
+git clone -b next https://github.com/asterisk/dahdi-tools dahdi-tools
+git clone -b next https://github.com/asterisk/dahdi-linux dahdi-linux
+
+
+#Asterisk Dependencies
+
+apt -y install git curl wget libnewt-dev libssl-dev libncurses5-dev libsqlite3-dev build-essential libjansson-dev libxml2-dev uuid-dev autoconf libedit-dev
+apt install -y libtool
+
+cd /usr/local/src/
+tar -zxvf dahdi-linux-complete-3.1.0+3.1.0.tar.gz
+cp dahdi-linux-complete-3.1.0+3.1.0/linux/drivers/dahdi/firmware/dahdi-fw*.tar.gz dahdi-linux/drivers/dahdi/firmware/
+cd dahdi-linux
+make
+make install
+cd dahdi-tools
+./bootstrap.sh
+libtoolize --force
+aclocal
+autoheader
+automake --force-missing --add-missing
+autoconf
+./configure
+make
+make install
+cd dahdi-linux-complete-3.1.0+3.1.0
+make install-config
+#check dahdi driver is loaded
+lsmod |grep dahdi
+#If driver is not loaded/shown
+modprobe wct4xxp
+#Now Dahdi driver should be displayed in following command
+lsmod |grep dahdi
+#enable dahdi
+systemctl enable dahdi
+systemctl start dahdi
+systemctl status dahdi
+dahdi_genconf -vv
+dahdi_cfg -vv
