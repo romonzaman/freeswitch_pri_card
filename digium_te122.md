@@ -249,7 +249,7 @@ if require, move files to corret path.
 
 ####### test
 ###
-
+```
 cd /usr/local/src/
 wget https://downloads.asterisk.org/pub/telephony/asterisk/asterisk-17-current.tar.gz
 wget https://downloads.asterisk.org/pub/telephony/dahdi-linux-complete/dahdi-linux-complete-3.1.0+3.1.0.tar.gz
@@ -257,10 +257,10 @@ wget https://downloads.asterisk.org/pub/telephony/libpri/libpri-1.6.0.tar.gz
 
 git clone -b next https://github.com/asterisk/dahdi-tools dahdi-tools
 git clone -b next https://github.com/asterisk/dahdi-linux dahdi-linux
-
+```
 
 #Asterisk Dependencies
-
+```
 apt -y install git curl wget libnewt-dev libssl-dev libncurses5-dev libsqlite3-dev build-essential libjansson-dev libxml2-dev uuid-dev autoconf libedit-dev
 apt install -y libtool
 
@@ -294,3 +294,4 @@ systemctl start dahdi
 systemctl status dahdi
 dahdi_genconf -vv
 dahdi_cfg -vv
+```
