@@ -295,3 +295,23 @@ systemctl status dahdi
 dahdi_genconf -vv
 dahdi_cfg -vv
 ```
+
+
+
+```
+yum update -y
+sed -i s/SELINUX=enforcing/SELINUX=disabled/g /etc/selinux/config
+reboot
+
+yum install -y make wget openssl-devel ncurses-devel  newt-devel libxml2-devel kernel-devel gcc gcc-c++ sqlite-devel libuuid-devel
+```
+
+Download the source tarballs. These commands will get the current release of DAHDI 2.6, libpri 1.4 and Asterisk 11.
+```
+cd /usr/src/
+wget https://downloads.Asterisk.org/pub/telephony/dahdi-linux-complete/dahdi-linux-complete-current.tar.gz
+wget https://downloads.Asterisk.org/pub/telephony/libpri/libpri-1.4-current.tar.gz
+wget https://downloads.Asterisk.org/pub/telephony/Asterisk/Asterisk-11-current.tar.gz
+
+
+```
