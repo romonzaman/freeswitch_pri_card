@@ -297,7 +297,7 @@ dahdi_cfg -vv
 ```
 
 
-
+### CentOS 6
 ```
 yum update -y
 sed -i s/SELINUX=enforcing/SELINUX=disabled/g /etc/selinux/config
@@ -309,9 +309,25 @@ yum install -y make wget openssl-devel ncurses-devel  newt-devel libxml2-devel k
 Download the source tarballs. These commands will get the current release of DAHDI 2.6, libpri 1.4 and Asterisk 11.
 ```
 cd /usr/src/
-wget https://downloads.Asterisk.org/pub/telephony/dahdi-linux-complete/dahdi-linux-complete-current.tar.gz
-wget https://downloads.Asterisk.org/pub/telephony/libpri/libpri-1.4-current.tar.gz
-wget https://downloads.Asterisk.org/pub/telephony/Asterisk/Asterisk-11-current.tar.gz
+wget https://downloads.asterisk.org/pub/telephony/dahdi-linux-complete/dahdi-linux-complete-2.6.2+2.6.2.tar.gz
+tar -zxvf dahdi-linux-complete-2.6.2+2.6.2.tar.gz
+cd dahdi-linux-complete-2.6.2+2.6.2
+make
+make install
+make install-config
+
+/etc/init.d/dahdi status
+/etc/init.d/dahdi start
+
+dahdi_genconf -vv
+dahdi_cfg -vv
+
+
+wget https://downloads.asterisk.org/pub/telephony/libpri/old/libpri-1.4.15.tar.gz
+tar-xvzf libpri-1.4.15.tar.gz
+cd libpri-1.4.15
+make
+make install
 
 
 ```
